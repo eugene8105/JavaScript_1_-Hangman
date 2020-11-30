@@ -27,7 +27,7 @@ $(document).ready(function () {
     
 
     var numberOfLetters = [];
-    numberOfLetters.length = displayedWord.length;
+    
 
     function checkUserInput() {
 
@@ -35,6 +35,8 @@ $(document).ready(function () {
 
         var tempDisplayedWord = displayedWord.split('');
         console.log(tempDisplayedWord);
+        
+        numberOfLetters.length = displayedWord.length;
 
         if (displayedWord.includes(userInput)) {
             for (var i = 0; i < tempDisplayedWord.length; i++) {
@@ -53,8 +55,10 @@ $(document).ready(function () {
             if(numberOfLetters[i] === 1){
                 chosenSquare = $(".square").eq(i);
                 chosenSquare.html(userInput);
+                console.log(userInput);
             }
         }
+        numberOfLetters = [];
     }
     var square;
     var chosenSquare;
