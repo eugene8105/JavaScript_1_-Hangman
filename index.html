@@ -9,25 +9,16 @@
 
 <body>
     <h1>Hangman</h1>
-    <h3>Info 1<br>Info 2</h3>
+    <h4>You have 6 tries.</h4>
+    <h3>The word is a sea creature.</h3>
+    <div>
+        <label for="theLetter">
+            Pleas enter the letter<br>
+        </label>
+        <input type="text" name="theLetter" id="theLetter" value="">
+        <input type="submit" name="Choose" id="userInput">
 
-    <!-- <div class="flex-container flex-column">
-        <div class="flex-container flex-wrap" id="board">
-            <div class="square"></div>
-            <div class="square"></div>
-            <div class="square"></div>
-            <div class="square"></div>
-            <div class="square"></div>
-            <div class="square"></div>
-            <div class="square"></div>
-            <div class="square"></div>
-            <div class="square"></div>
-        </div>
-
-        
-        <button id="reset-button">reset</button>
-    </div> -->
-
+    </div>
     <div class="container justify-content-center">
         <h1 id="win"></h1>
 
@@ -38,7 +29,12 @@
         </div>
     
     </div>
+    <div>
 
+        <a>You entered letters:</a><br>
+
+
+    </div>
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.1/dist/jquery.validate.js"></script>
     <!-- My script -->
