@@ -18,6 +18,8 @@ $(document).ready(function () {
     var userInput = "";
     var numberOfWrong = 0;
 
+    var userLetters = [];
+
     $("#userInput").click(function () {
         checkUserInput();
         $('input[type="text"]').val('');
@@ -32,10 +34,21 @@ $(document).ready(function () {
     function checkUserInput() {
 
         userInput = $("#theLetter").val().toLowerCase();
+        // will push user Input to an array for future checks.
+        userLetters.push(userInput);
+
+        // will check if letter was entered before
+        if(checkIfLetterWasEntered()){
+            alert("You entered this letter bifore!");
+        } else {
+            $("#userLetters").append(userInput);
+        }
+        
+        
 
         var tempDisplayedWord = displayedWord.split('');
         console.log(tempDisplayedWord);
-        
+
         numberOfLetters.length = displayedWord.length;
 
         if (displayedWord.includes(userInput)) {
@@ -49,6 +62,13 @@ $(document).ready(function () {
         }
         feelTheSquares();
     }
+
+    // need to finish this function
+    function checkIfLetterWasEntered(){
+
+        return false;
+    }
+
     // will feel the squares with user input if it's present
     function feelTheSquares(){
         for(var i = 0; i < numberOfLetters.length; i ++) {
