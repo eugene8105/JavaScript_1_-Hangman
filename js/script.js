@@ -1,50 +1,88 @@
 
 $(document).ready(function () {
-
     // sea creatures
-    var theWords = ["fish", "shark", "octopus", "turtle", "whale"];
+    var theWords = ["fish", "shark", "octopus", "turtle", "whale", "crab", "seal", "seahorse", "starfish", "ray"];
+
     var theWordIndex = 0;
 
     var theWordIndex = Math.floor(Math.random() * theWords.length);
 
-
     var numOfSquersToDisplay = theWords[theWordIndex].length;
     var displayedWord = theWords[theWordIndex];
-    console.log(displayedWord);
 
     const totalRows = 1;
     const totalCols = numOfSquersToDisplay;
 
     var userInput = "";
-    var numberOfWrong = 0;
-
     var userLetters = [];
-
-    $("#userInput").click(function () {
-        checkUserInput();
-        $('input[type="text"]').val('');
-    });
-
-    createBoard();
-    
-
+    var trialsLeft = 6;
     var numberOfLetters = [];
+
+    var square;
+    var chosenSquare;
+    var rowOfSquares;
+    var wordPressent = 0;
+
+    playGame();
+
+    function playGame() {
+
+        $("#trialsLeft").text(trialsLeft);
+
+        $("#userInput").click(function () {
+            checkUserInput();
+            $('input[type="text"]').val('');
+        });
+
+        createBoard();
+    }
+
+    function checkWiner() {
+        if (trialsLeft === 0) {
+            alert("You lost!");
+            resetGame();
+        }
+        // create an array of chars for check if user array have all of them
+        var tempWord = displayedWord.split('');
+        if(userLetters.length >= tempWord.length){
+            for(var i = 0; i < tempWord.length; i++){
+                console.log(tempWord[i]);
+                if(userLetters.includes(tempWord[i])){
+                    // need to fix here
+                    wordPressent++;
+                    if(wordPressent === tempWord.length){
+                        alert("YOU GOT IT! GOOD JOB!");
+                        resetGame();
+                    }
+                  console.log("Yes!");
+                }else {
+                  console.log("No!");
+                 break; 
+                }
     
+              }
+
+              wordPressent = 0;
+              console.log(`wordPressent was reset`);
+            }
+        }
+        
+
+    function resetGame() {
+        location.reload(true);
+    }
 
     function checkUserInput() {
 
         userInput = $("#theLetter").val().toLowerCase();
-        // will push user Input to an array for future checks.
-        userLetters.push(userInput);
-
         // will check if letter was entered before
-        if(checkIfLetterWasEntered()){
+        if (checkIfLetterWasEntered()) {
             alert("You entered this letter bifore!");
         } else {
+            // will push user input to an array for future checks.
+            userLetters.push(userInput);
             $("#userLetters").append(userInput);
         }
-        
-        
 
         var tempDisplayedWord = displayedWord.split('');
         console.log(tempDisplayedWord);
@@ -59,20 +97,30 @@ $(document).ready(function () {
                     numberOfLetters[i] = 0;
                 }
             }
+            
+        } else {
+            trialsLeft--;
+            // $("#trialsLeft").text(trialsLeft);
+
+            // checkWiner();
         }
         feelTheSquares();
+        $("#trialsLeft").text(trialsLeft);
+        checkWiner();
     }
 
-    // need to finish this function
-    function checkIfLetterWasEntered(){
-
+    // checking if user entered the letter bifore.
+    function checkIfLetterWasEntered() {
+        if (userLetters.includes(userInput)) {
+            return true;
+        }
         return false;
     }
 
     // will feel the squares with user input if it's present
-    function feelTheSquares(){
-        for(var i = 0; i < numberOfLetters.length; i ++) {
-            if(numberOfLetters[i] === 1){
+    function feelTheSquares() {
+        for (var i = 0; i < numberOfLetters.length; i++) {
+            if (numberOfLetters[i] === 1) {
                 chosenSquare = $(".square").eq(i);
                 chosenSquare.html(userInput);
                 console.log(userInput);
@@ -80,9 +128,6 @@ $(document).ready(function () {
         }
         numberOfLetters = [];
     }
-    var square;
-    var chosenSquare;
-    var rowOfSquares;
 
     function createBoard() {
         // How big can each square be?

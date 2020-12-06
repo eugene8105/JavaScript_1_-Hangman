@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head><title>Hangman</title>
+<head>
+    <title>Hangman</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="css/style.css" rel="stylesheet" type="text/css">
 </head>
 
@@ -16,7 +17,7 @@
             Pleas enter the letter<br>
         </label>
         <input type="text" name="theLetter" id="theLetter" value="">
-        <input type="submit" name="Choose" id="userInput">
+        <input type="submit" name="choose" id="userInput">
 
     </div>
     <div class="container justify-content-center">
@@ -24,13 +25,13 @@
 
         <div class="row">
             <div class="col" id="board">
-                
+
             </div>
         </div>
-    
+
     </div>
     <div>
-
+        <a>You have <span id="trialsLeft"></span> tries left.</a><br>
         <a>You entered letters:</a><br>
         <span id="userLetters"></span>
 
