@@ -9,6 +9,7 @@ $(document).ready(function () {
 
     var numOfSquersToDisplay = theWords[theWordIndex].length;
     var displayedWord = theWords[theWordIndex];
+    // console.log(displayedWord);
 
     const totalRows = 1;
     const totalCols = numOfSquersToDisplay;
@@ -44,29 +45,25 @@ $(document).ready(function () {
         }
         // create an array of chars for check if user array have all of them
         var tempWord = displayedWord.split('');
-        if(userLetters.length >= tempWord.length){
-            for(var i = 0; i < tempWord.length; i++){
-                console.log(tempWord[i]);
-                if(userLetters.includes(tempWord[i])){
+        if (userLetters.length >= tempWord.length) {
+            for (var i = 0; i < tempWord.length; i++) {
+                if (userLetters.includes(tempWord[i])) {
                     // need to fix here
                     wordPressent++;
-                    if(wordPressent === tempWord.length){
+                    if (wordPressent === tempWord.length) {
                         alert("YOU GOT IT! GOOD JOB!");
                         resetGame();
                     }
-                  console.log("Yes!");
-                }else {
-                  console.log("No!");
-                 break; 
+                } else {
+                    break;
                 }
-    
-              }
 
-              wordPressent = 0;
-              console.log(`wordPressent was reset`);
             }
+
+            wordPressent = 0;
         }
-        
+    }
+
 
     function resetGame() {
         location.reload(true);
@@ -77,7 +74,7 @@ $(document).ready(function () {
         userInput = $("#theLetter").val().toLowerCase();
         // will check if letter was entered before
         if (checkIfLetterWasEntered()) {
-            alert("You entered this letter bifore!");
+            alert("You entered this letter before!");
         } else {
             // will push user input to an array for future checks.
             userLetters.push(userInput);
@@ -85,7 +82,6 @@ $(document).ready(function () {
         }
 
         var tempDisplayedWord = displayedWord.split('');
-        console.log(tempDisplayedWord);
 
         numberOfLetters.length = displayedWord.length;
 
@@ -97,7 +93,7 @@ $(document).ready(function () {
                     numberOfLetters[i] = 0;
                 }
             }
-            
+
         } else {
             trialsLeft--;
             // $("#trialsLeft").text(trialsLeft);
@@ -106,7 +102,14 @@ $(document).ready(function () {
         }
         feelTheSquares();
         $("#trialsLeft").text(trialsLeft);
-        checkWiner();
+
+        timeFunction();
+    }
+
+    // using delay function to run checkWiner.
+    // without this function checkWiner will run faster than square filling the latter.
+    function timeFunction() {
+        setTimeout(function () { checkWiner(); }, 500)
     }
 
     // checking if user entered the letter bifore.
@@ -123,7 +126,6 @@ $(document).ready(function () {
             if (numberOfLetters[i] === 1) {
                 chosenSquare = $(".square").eq(i);
                 chosenSquare.html(userInput);
-                console.log(userInput);
             }
         }
         numberOfLetters = [];
